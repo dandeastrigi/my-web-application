@@ -67,7 +67,7 @@ const CheckoutForm = ({ price, onSuccessfulCheckout }) => {
                       +'", "state": "'+ev.target.state.value+
                       '", "email": "'+ev.target.email.value+
                       '", "zip": "'+ev.target.zip.value+
-                      '", "amount": "'+price * 100+'"}'
+                      '", "amount": "'+price+'"}'
 
     setProcessingTo(true);
 

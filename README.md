@@ -1,77 +1,120 @@
-### E-commerce Tool
+
+# E-commerce Tool
+
 A tool to start develop an e-commerce.
 
 ----
-#### About
-Before start, take a look at this [image](./images/infra.png), that's a structural part of solution, the checkout can be performed from a app in webpage from browser, or from an app, that's because of *Go Middleware service*  work with *http* protocol, using *JSON data pattern* to perform data transfer, after this add a hostname on your */etc/hosts*, example:
 
-```
+#### About
+
+Before start, take a look at this [image](./images/infra.png), that's structural concept of this package, the checkout can be performed from a app in webpage from browser, this application runs under *http* protocol, using *JSON data pattern* to perform data transfer, before start, add one hostname on your */etc/hosts*, supposing you use linux os, example:
+
+```vim
 127.0.0.1	localhost
 127.0.0.1       myhost.com
 
 ```
 
----
-###### *checkout* path
+----
+
+##### Checkout
+
 This package depends on *node*
 
-The assignments of checkt is:
-- Validate checkout with stripe api
-- Send checkout requests
+The checkout assignments:
 
-To execute tests in my branch, i used this [repo](https://github.com/tmarek-stripe/demo-react-stripe-js), i just add a request to my service when checkout is confirmed by Stripe.
+- Validate checkout with stripe api.
+- Send checkout requests.
 
+***Before start***
+Create an account on [Stripe](https://stripe.com/en-br), and get your test keys inside of dashboard, than put your keys on *.env* file inside checkout directory.
+
+To execute tests with this package, i used this [repo](https://github.com/tmarek-stripe/demo-react-stripe-js), provided from [Stripe](https://stripe.com/en-br).
+
+***Starting***
 To start this service, enter on *checkout* directory, and run:
-```
+
+```bash
 npm run dev
 ```
 
----
-###### *Go Middleware service*
+----
+
+##### Middleware-service
+
 The *Go Middleware service* assignments:
-- Receive requets from browser
-- Confirm checkout
-- Write logs (only about herself)
-- Write/Read SQLite checkout database
-- Send information to be rendered on app or browser
+
+- Receive requests from browser.
+- Confirm checkout.
+- Write logs (only about herself).
+- Write/Read SQLite checkout database.
+- Send information to be rendered on app or browser.
 
 Before start, edit the *Dockerfile* inside folder, and put the *hostname* of you have created before in */etc/hosts*, and put your hostname on *ENV APP_ORIGIN_URL*
-```
+
+```vim
 ENV APP_ORIGIN_URL http://myhost.com:3000
 ```
+
+Or you can put * for accept all requests (use only in development)
+
 To start service, enter on *middleware-service* directory and run:
-```
+
+```bash
 docker-compose up --build
 ```
 
----
-###### *Go validation and sync service*
+or run with go (if you like to read sqlite database is a better way)
+
+```bash
+go get ./
+go run main.go
+```
+
+----
+
+###### *Validator*
+
+```vim
+Not implemented yet
+```
+
 The *Go validation and sync* assignments:
+
 - Check SQLite checkout database x times in hour for new checkouts
 - Send information to database when get a new checkout
 - Update SQLite checkout database when receive platform hook
 - Write logs (only about herself)
 
 To start service, enter on *validator* directory and run:
-```
+
+```bash
 docker-compose up --build
 ```
----
+
+----
+
 ###### *Administration platform*
-```
+
+```vim
 Not implemented yet
 ```
 
 The *Administration platform* assignments:
-- Read/Write database
-- Admin reports/cruds
-- Hooks to service
-- Logs (only about herself)
 
----
+- Read/Write database.
+- Admin reports/cruds.
+- Hooks to service.
+- Logs (only about herself).
+
+----
+
 ###### *Backup System*
-```
+
+```vim
 Not implemented yet
 ```
+
 The *Backup system* assignments:
-- Perform backup of configured databases
+
+- Perform backup of configured databases.
